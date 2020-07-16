@@ -1,0 +1,476 @@
+from manimlib.imports import *
+
+class MyText(Text):
+    CONFIG = {
+        'font' : '儿童卡通字体',
+        'size' : 0.5,
+        'stroke_width':1,
+    }
+
+class ZanZhu(Scene):
+    def construct(self):
+        text1 = VGroup(MyText("本视频由“"),MyText("戈弗雷·哈罗德·哈代").set_color(GREEN_D),MyText("”赞助播出"))
+        text1.arrange_submobjects(RIGHT/2).to_edge(DOWN).scale(0.8)
+        img1 = ImageMobject("hadai.jpg",height = 6,invert = False)
+        text2 =  VGroup(MyText("本视频还由“"),MyText("儿童卡通字体").set_color(PINK),MyText("”赞助播出"))
+        text2.arrange_submobjects(RIGHT/2).to_edge(DOWN)
+        img2 = ImageMobject("etktzt.png",height = 3,invert = False)
+        
+        self.play(Write(text1),FadeIn(img1))
+        self.wait(3)
+        self.remove(text1,img1)
+        self.play(Write(text2),FadeIn(img2))
+        self.wait(4)
+
+class MuLu(Scene):
+    def construct(self):
+        text1 = MyText("本视频将继续讲解上期视频的内容").set_color(BLUE_D).to_edge(3*UP)
+        text2 = MyText("四、伽马函数的性质").next_to(text1,DOWN)
+        text3 = MyText("五、阶乘的应用").next_to(text2,DOWN)
+        text4 = MyText("六、UP主的一些废话（bushi）").next_to(text3,DOWN)
+        text5 = MyText("等    :)").next_to(text4,DOWN)
+        text6 = MyText("(注:本视频适合小学一年级以上同学观看)").next_to(text5,DOWN).scale(0.8)
+        text7 = MyText("如果不是请自觉给完三连并关闭视频").next_to(text6,DOWN).scale(0.8)
+        img1 = ImageMobject("doge.png",height = 0.8,invert = False).next_to(text6,RIGHT)
+        
+
+
+        self.play(Write(text1))
+        self.play(Write(text2))
+        self.play(Write(text3))
+        self.play(Write(text4))
+        self.play(Write(text5))
+        self.wait(3)
+        self.play(Write(text6),FadeIn(img1))
+        self.wait(2)
+        self.play(Write(text7))
+        self.wait(2)
+
+class MuLu2(Scene):
+    def construct(self):
+        text1 = MyText("开玩笑的啦").set_color(YELLOW)
+        img1 = ImageMobject("erha.jpg",height = 0.8,invert = False).next_to(text1,RIGHT)
+        text2 = MyText("那么废话不多说，开始我们的正题吧！").set_color(RED)
+
+        self.play(Write(text1))
+        self.play(FadeIn(img1))
+        self.wait(2)
+        self.remove(img1)
+        self.play(ReplacementTransform(text1,text2))
+        self.wait(2)
+
+class First(Scene):
+    def construct(self):
+        text0 = MyText("四、伽马函数的性质").set_color(YELLOW).scale(1).to_corner(UL)
+        text1 = VGroup(MyText("在上一期视频中我们导出了著名的"),MyText("伽马函数"))
+        text1.arrange_submobjects(RIGHT/2).set_color(GOLD_B)
+        tex1 = TexMobject(r"\Gamma(n)=(n-1){!}=\int_{0}^{\infty} \lambda^{n-1} e^{-\lambda} \mathrm{d}\lambda").set_color_by_gradient([BLUE,WHITE,YELLOW]).next_to(text1,DOWN,1)
+        texta = VGroup(text1,tex1)
+        text2 = MyText("但是它有什么性质呢？").set_color(GOLD_B)
+        text3 = MyText("emmmmmmm……").set_color(GREEN_D).scale(2)
+        img1 = ImageMobject("sk.jpg",height =3,invert = False).next_to(text3,DOWN)
+        text4 = MyText("1.递归性质").set_color(RED).scale(2)
+        text5 = MyText("使用我们小学二年级学习的分部积分法，我们不难得到：").to_edge(UP)
+        tex2_0 = TexMobject(r"\Gamma(n+1)=")
+        tex2_1 = TexMobject(r"\int_{0}^{\infty} \lambda^{n} e^{-\lambda} d \lambda")
+        tex2 = VGroup(tex2_0,tex2_1)
+        tex2.arrange_submobjects(RIGHT/2).to_edge(2.2*UP+2*LEFT)
+        tex3 = TexMobject(r"=\left[-\lambda^{n} e^{-\lambda}\right]_{0}^{\infty}+\int_{0}^{\infty} n \lambda^{n-1} e^{-\lambda} d \lambda").to_edge(4.7*UP+6.2*LEFT)
+        tex4 = TexMobject(r"=")
+        tex5 = TexMobject(r"\lim _{\lambda \rightarrow \infty}\left(-\lambda^{n} e^{-\lambda}\right)-\left(0 e^{-0}\right)").next_to(tex4,RIGHT)
+        tex6 = TexMobject(r"+n \int_{0}^{\infty} \lambda^{n-1} e^{-\lambda} d \lambda").next_to(tex5,RIGHT)
+        textb = VGroup(tex4,tex5,tex6).to_edge(7.2*UP+6.2*LEFT)
+        rectangle = SurroundingRectangle(tex5, fill_color = WHITE, fill_opacity = 0.3)
+        tex7 = TexMobject(r"0").to_edge(10.5*LEFT+4.8*DOWN)
+        tex8 = TexMobject(r"=").next_to(tex7,LEFT,2)
+        tex9 = TexMobject(r"+n \int_{0}^{\infty} \lambda^{n-1} e^{-\lambda} d \lambda").next_to(tex8,RIGHT,4)
+        textc = VGroup(tex8,tex9).to_edge(9.7*UP+6.2*LEFT)
+        tex10 = TexMobject(r"=n \int_{0}^{\infty} \lambda^{n-1} e^{-\lambda} d \lambda").to_edge(12.2*UP+6.2*LEFT).set_color(YELLOW)
+        tex11 = TexMobject(r"n \Gamma(n)").next_to(tex2_0,RIGHT).set_color(YELLOW)
+        textd = VGroup(tex2_0,tex11)
+        text6 = MyText("这个性质其实并不难理解").next_to(text5,DOWN,1.5)
+        text7 = MyText("伽马函数是阶乘的延拓，必然伽马函数也拥有与阶乘相似的性质").next_to(text5,DOWN,1.5)
+        text8 = MyText("伽马函数的性质").to_edge(UP)
+        text9 = MyText("阶乘的性质").next_to(text5,DOWN,1.5)
+        tex12 = TexMobject(r"(n+1) !=(n+1) n!").next_to(text9,DOWN).set_color(YELLOW)
+        texte = VGroup(text9,tex12)
+        text10 = MyText("如果觉得相似的，请在弹幕里扣1").set_color(GOLD)
+        text11 = VGroup(MyText("如果觉得不相似的，请在弹幕里扣"),TexMobject(r"\frac{\sin x}{x}"),MyText("在0处的极限"))
+        text11.arrange_submobjects(RIGHT/2).set_color(GOLD).next_to(text10,DOWN)
+        textf = VGroup(text10,text11).to_edge(6*UP)
+
+    
+        self.play(ShowCreation(text0),run_time=2)
+        self.wait(0.5)
+        self.play(Uncreate(text0))
+        self.play(Write(text1))
+        self.play(Write(tex1))
+        self.wait(2)
+        self.play(ReplacementTransform(texta,text2))
+        self.wait(2)
+        self.play(ReplacementTransform(text2,text3))
+        self.play(FadeIn(img1))
+        self.wait(2)
+        self.remove(img1)
+        self.play(Uncreate(text3))
+        self.play(ShowCreation(text4))
+        self.wait(2)
+        self.play(Uncreate(text4))
+        self.play(Write(text5))
+        self.wait(1)
+        self.play(Write(tex2))
+        self.wait(1)
+        self.play(Write(tex3))
+        self.wait(2)
+        self.play(Write(textb))
+        self.wait(2)
+        self.play(Write(rectangle))
+        self.play(TransformFromCopy(tex5,tex7))
+        self.play(Write(textc))
+        self.wait(2)
+        self.play(Write(tex10))
+        self.wait(2)
+        self.remove(tex2_1,textb,tex3,rectangle,tex7,textc)
+        self.play(ReplacementTransform(tex10,tex11))
+        self.wait(2)
+        self.play(ApplyMethod(textd.shift,4*RIGHT))
+        self.play(Write(text6))
+        self.wait(2)
+        self.play(ReplacementTransform(text6,text7))
+        self.wait(2)
+        self.play(ReplacementTransform(text6,text7))
+        self.play(ReplacementTransform(text7,text9))
+        self.play(ReplacementTransform(text5,text8))
+        self.play(Write(tex12))
+        self.play(ApplyMethod(texte.shift,3.5*DOWN))
+        self.wait(2)
+        self.play(Write(textf))
+        self.wait(4)
+
+class Second(Scene):
+    def construct(self):
+        text1 = MyText("2.余元公式").set_color(BLUE).scale(2)
+        tex1 = TexMobject(r"\Gamma(1-x) \Gamma(x)=\frac{\pi}{\sin \pi x}~~~~~x \in(0,1)").to_edge(3*UP).set_color_by_gradient([BLUE,GREEN,YELLOW])
+        text2 = MyText("现在我们有了这个公式我们同样可以求出0.5！的值").next_to(tex1,DOWN)
+        text3 = VGroup(MyText("将"),TexMobject(r"x=\frac{1}{2}"),MyText("代入余元公式"))
+        text3.arrange_submobjects(RIGHT/2).next_to(tex1,DOWN)
+        tex2 = TexMobject(r"\Gamma \left(1-\frac{1}{2}\right)\Gamma\left(\frac{1}{2}\right)=\frac{\pi}{\sin \frac{\pi}{2}}").next_to(text3,DOWN)
+        tex3 = TexMobject(r"\left[\Gamma\left(\frac{1}{2}\right)\right]^{2}=\pi").next_to(text3,DOWN)
+        tex4 = TexMobject(r"\Gamma\left(\frac{1}{2}\right)=\sqrt{\pi}").next_to(text3,DOWN).set_color(YELLOW)
+        text4 = MyText("我们得到了一个很重要的等式").next_to(tex1,DOWN)
+        rectangle1 = SurroundingRectangle(tex4, fill_color = WHITE, fill_opacity = 0.2)
+        text5 = MyText("这对我们求解0.5！的值有很大的帮助").next_to(tex1,DOWN)
+        tex5 = TexMobject(r"\frac{1}{2}!=\Gamma\left(1+\frac{1}{2}\right)").next_to(text5,DOWN)
+        tex6 = TexMobject(r"\Gamma\left(1+\frac{1}{2}\right)=\frac{1}{2}\Gamma\left (\frac{1}{2}\right)=\frac{1}{2} \sqrt{\pi}").next_to(tex5,DOWN)
+        texta = VGroup(tex5,tex6)
+        text6 = MyText("就这样我们再一次得出了0.5！的值").next_to(tex1,DOWN)
+        tex7 = TexMobject(r"\frac{1}{2} !=\frac{1}{2} \sqrt{\pi}").to_edge(5*DOWN)
+        rectangle2 = SurroundingRectangle(tex7)
+        text7 = MyText("关于余元公式的证明，我确信已发现了一种美妙的证法！").next_to(tex1,DOWN).set_color(RED)
+        text8 = MyText("可惜这期视频时间太短，写不下").next_to(tex1,DOWN).set_color(YELLOW)
+        img1 = ImageMobject("feima.jpg",height =3,invert = False).next_to(text8,DOWN,.5)
+        text9 = MyText("皮耶·德·费马（1601年8月17日-1665年1月12日），出生于法国，律师、业余数学家").next_to(img1,DOWN).scale(0.7)
+
+
+
+
+
+        self.play(ShowCreation(text1))
+        self.wait(2)
+        self.play(Uncreate(text1))
+        self.play(Write(tex1))
+        self.wait(1)
+        self.play(Write(text2))
+        self.wait(2)
+        self.play(ReplacementTransform(text2,text3))
+        self.wait(2)
+        self.play(Write(tex2))
+        self.wait(2)
+        self.play(ReplacementTransform(tex2,tex3))
+        self.wait(1)
+        self.play(ReplacementTransform(tex3,tex4))
+        self.wait(1)
+        self.play(ReplacementTransform(text3,text4))
+        self.play(Write(rectangle1),run_time=1.5)
+        self.wait(2)       
+        self.play(ReplacementTransform(text4,text5))
+        self.wait(2) 
+        self.remove(rectangle1,tex4)
+        self.play(Write(tex5))
+        self.wait(2) 
+        self.play(Write(tex6))
+        self.wait(2) 
+        self.play(ReplacementTransform(text5,text6))
+        self.wait(0.9) 
+        self.play(ReplacementTransform(texta,tex7))
+        self.play(Write(rectangle2))
+        self.wait(2) 
+        self.remove(tex7,rectangle2)
+        self.play(ReplacementTransform(text6,text7))
+        self.wait(3) 
+        self.play(ReplacementTransform(text7,text8))
+        self.play(FadeIn(img1))
+        self.play(Write(text9))
+        self.wait(3) 
+
+class Third(Scene):
+    def construct(self):
+        text1 = MyText("3.beta函数").set_color(GREEN).scale(2)
+        text2 = MyText("beta函数又称为第一类欧拉积分，表达式如下").to_edge(UP)
+        tex1 = TexMobject(r"B(P, Q)=\int_{0}^{1} x^{P-1}(1-x)^{Q-1} d x").set_color(ORANGE).next_to(text2,DOWN,1.5)
+        texta = VGroup(MyText("其中仅当"),TexMobject(r"P>0, Q>0"),MyText("时，这个函数才收敛"))
+        texta.arrange_submobjects(RIGHT/2).next_to(tex1,DOWN,1)
+        text3 = MyText("beta函数也是一个很重要的函数，它有如下的性质").to_edge(UP)
+        text4 = MyText("(1).连续性").to_edge(LEFT+2.5*UP).set_color(GOLD)
+        text5 = MyText("beta函数在定义域范围内连续").to_edge(4.4*UP).set_color(GREEN)
+        text6 = MyText("(2).对称性").to_edge(LEFT).set_color(PINK)
+        tex2 = TexMobject(r"B(P, Q)=B(Q, \mathrm{P})").to_edge(9.7*UP).set_color(BLUE)
+        text7 = MyText("当然本期视频的主角是gamma函数，自然要讲它与beta函数的关联").to_edge(UP).scale(0.9)
+        text8 = MyText("beta函数同样可以用gamma函数来表示").to_edge(UP).scale(0.9)
+        tex3 = TexMobject(r"B(P, Q)=\frac{\Gamma(P) \Gamma(Q)}{\Gamma(P+Q)}").set_color(YELLOW).scale(1.5)
+        tex4 = TexMobject(r"P、Q \in R^{+}").next_to(tex3,DOWN).set_color(BLUE)
+        textb = VGroup(tex3,tex4)
+        text9 = MyText("运用这个等式稍加计算，不难得到：").to_edge(UP).scale(0.9)
+        tex5 = TexMobject(r"B(P, 1-P)=\Gamma(P) \Gamma(1-P)").set_color(RED_A).scale(1.5)
+
+
+
+        self.play(ShowCreation(text1))
+        self.wait(2)
+        self.play(Uncreate(text1))
+        self.wait(1)
+        self.play(Write(text2))
+        self.play(Write(tex1))
+        self.wait(0.5)
+        self.play(Write(texta))
+        self.wait(2)
+        self.remove(tex1,texta)
+        self.play(ReplacementTransform(text2,text3))
+        self.wait(2)
+        self.play(Write(text4))
+        self.play(Write(text5))
+        self.wait(2)
+        self.play(Write(text6))
+        self.play(Write(tex2))
+        self.wait(2)
+        self.play(ReplacementTransform(text3,text7))
+        self.wait(1)
+        self.play(Uncreate(text4),Uncreate(text5),Uncreate(text6),Uncreate(tex2))      
+        self.wait(2)
+        self.play(ReplacementTransform(text7,text8))
+        self.wait(1)
+        self.play(Write(tex3))
+        self.play(Write(tex4))
+        self.wait(3)
+        self.play(ReplacementTransform(text8,text9))
+        self.play(ReplacementTransform(textb,tex5))
+        self.wait(3)
+
+class Fourth(Scene):
+    def construct(self):
+        text1 = MyText("4.gamma分布").set_color(YELLOW).scale(2)
+        text2 = MyText("伽玛分布是统计学的一种连续概率函数，是概率统计中一种非常重要的分布").to_edge(UP).scale(0.8)
+        tex1 = TexMobject(r"f(x,\beta,\alpha)=",r"\frac{\beta^{\alpha}}{\Gamma(\alpha)}",r"x^{\alpha-1} e^{-\beta x}, x>0").set_color(GOLD_D).to_edge(5*UP)
+        text3 = MyText("其中均值与方差分别为").next_to(tex1,DOWN)
+        tex2 = TexMobject(r"\begin{aligned}\mu &=\frac{\alpha}{\beta} \\\sigma^{2} &=\frac{\alpha}{\beta^{2}}\end{aligned}").next_to(text3,DOWN)
+        text4 = MyText("当然在这个式子里也出现了我们熟悉的老朋友，gamma函数").to_edge(UP)
+        rectangle1 = SurroundingRectangle(tex1[1][3:7],fill_opacity = .3).set_color(GREEN)
+
+        
+
+        self.play(ShowCreation(text1))
+        self.wait(2)
+        self.play(Uncreate(text1))
+        self.wait(1)
+        self.play(Write(text2))
+        self.play(Write(tex1))
+        self.wait(2)
+        self.play(Write(text3))
+        self.play(Write(tex2))
+        self.wait(3)
+        self.play(Uncreate(text3),Uncreate(tex2))      
+        self.play(ReplacementTransform(text2,text4))
+        self.play(Write(rectangle1))
+        self.wait(3)
+
+class Fifth(Scene):
+    def construct(self):
+        text0 = MyText("五、阶乘的应用").set_color(YELLOW).scale(1).to_corner(UL)
+        text1 = MyText("阶乘的应用十分的广泛，在众多的公式都能看到它的影子").to_edge(UP).scale(0.8)
+        tex1 = TexMobject(r"P_{n}^{m}=n(n-1)(n-2) \cdots(n-m+1)=\frac{n !}{(n-m) !}").set_color(GOLD).to_edge(5*UP)
+        tex2 = TexMobject(r"C_{n}^{m}=\dbinom{n}{m}=\frac{P_{n}^{m}}{m !}=\frac{n !}{m !(n-m) !}").set_color(RED_D).next_to(tex1,DOWN)
+        text2 = MyText("排列组合").next_to(tex1,UP)
+        tex3 = TexMobject(r"\int \sin ^{n} x d x=\frac{2}{(2 i)^{n}}\left(\sum_{k=0}^{\frac{1}{2} n-1} \frac{i^{2 k} C_{n}^{k}}{n-2 k} \cdot \sin ((n-2 k) x)+\frac{1}{2} x \cdot i^{n} C_{n}^{n / 2}\right)").set_color(GREEN_E).to_edge(6*UP).scale(0.9)
+        texta = VGroup(TexMobject(r"\sin ^{n} x"),MyText("的不定积分"))
+        texta.arrange_submobjects(RIGHT/2).next_to(tex1,UP)
+        textb = VGroup(MyText("A.当"),TexMobject(r"n=2 z, z \in Z"),MyText("时"))
+        textb.arrange_submobjects(RIGHT/2).next_to(texta,DOWN).set_color(YELLOW_E)
+        textc = VGroup(MyText("B.当"),TexMobject(r"n=2 z+1, z \in Z"),MyText("时"))
+        textc.arrange_submobjects(RIGHT/2).next_to(tex3,DOWN).set_color(YELLOW_E)
+        tex4 = TexMobject(r"\int \sin ^{n} x d x=\frac{2}{(2 i)^{n}} \sum_{k=0}^{\frac{1}{2}(n-1)} \frac{i^{2 k-1} C_{n}^{k}}{n-2 k} \cdot \cos ((n-2 k) x)").set_color(BLUE_E).next_to(textc,DOWN)
+        textd = VGroup(TexMobject(r"\cos ^{n} x"),MyText("的不定积分"))
+        textd.arrange_submobjects(RIGHT/2).next_to(tex1,UP)
+        texte = VGroup(MyText("A.当"),TexMobject(r"n=2 z, z \in Z"),MyText("时"))
+        texte.arrange_submobjects(RIGHT/2).next_to(texta,DOWN).set_color(YELLOW_E)
+        tex5 = TexMobject(r"\int \cos ^{n} x d x=\frac{1}{2^{n-1}}\left(\sum_{k=0}^{\frac{1}{2} n-1} \frac{C_{n}^{k}}{n-2 k} \cdot \sin ((n-2 k) x)+\frac{1}{2} x \cdot i^{n} C_{n}^{n / 2}\right)").set_color(GREEN_SCREEN).next_to(texte,DOWN,-0.01).scale(0.9)
+        textf = VGroup(MyText("B.当"),TexMobject(r"n=2 z+1, z \in Z"),MyText("时"))
+        textf.arrange_submobjects(RIGHT/2).next_to(tex3,DOWN).set_color(YELLOW_E)
+        tex6 = TexMobject(r"\int \cos ^{n} x d x=\frac{1}{2^{n-1}} \sum_{k=0}^{\frac{1}{2}(n-1)} \frac{C_{n}^{k}}{n-2 k} \cdot \sin ((n-2 k) x)").set_color(PINK).next_to(textf,DOWN)
+        text3 = MyText("等幂求和").next_to(tex1,UP)
+        tex7 = TexMobject(r"\sum_{i=0}^{n} i^{m}=\frac{1}{m+1} \sum_{i=0}^{m}\dbinom{m+1}{i} B_{i}(n+1)^{m+1-i}").set_color(ORANGE).next_to(text3,DOWN,1)
+        textg= VGroup(MyText("其中"),TexMobject(r"B_{i}"),MyText("其中是伯努利数"))
+        textg.arrange_submobjects(RIGHT/2).next_to(tex7,DOWN,1)
+        text4 = MyText("泰勒展开").next_to(tex1,UP)
+        tex8 = TexMobject(r"f(x)=\sum_{n=0}^{\infty} \frac{f^{(n)}\left(x_{0}\right)}{n !}\left(x-x_{0}\right)^{n}").set_color(LIGHT_BROWN).next_to(text4,DOWN).scale(0.9)
+        tex9 = TexMobject(r"=f\left(x_{0}\right)+f^{\prime}\left(x_{0}\right)\left(x-x_{0}\right)+\frac{f^{\prime \prime}\left(x_{0}\right)}{2 !}\left(x-x_{0}\right)^{2}+\cdots+\frac{f^{(n)}\left(x_{0}\right)}{n !}\left(x-x_{0}\right)^{n}+\cdots").set_color(GREEN_SCREEN).next_to(tex8,DOWN).scale(0.7)
+        tex10 = TexMobject(r"\sin x=\sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2 n+1) !} x^{2 n+1}").set_color(RED_E).next_to(text4,DOWN)
+        tex11 = TexMobject(r"\cos x=\sum_{n=0}^{\infty} \frac{(-1)^{n}}{(2 n) !} x^{2 n}").set_color(ORANGE).next_to(tex10,DOWN)
+        tex12 = TexMobject(r"e^{x}=\sum_{n=0}^{\infty} \frac{x^{n}}{n !}").set_color(PINK).next_to(tex11,DOWN)
+        text5 = MyText("你很难想象数学家为什么创造这样一个简单的符号")
+        tex13 = TexMobject(r"!").set_color_by_gradient([BLUE,PINK]).next_to(tex5,DOWN,1).scale(5)
+        text6 = MyText("但它的存在却让那些复杂的公式清晰而又简单")
+
+       
+        self.play(ShowCreation(text0),run_time=2)
+        self.wait(0.5)
+        self.play(Uncreate(text0))
+        self.play(Write(text1))  
+        self.wait(1)
+        self.play(Write(text2))
+        self.play(Write(tex1))
+        self.play(Write(tex2))
+        self.wait(1)
+        self.play(Uncreate(tex1),Uncreate(tex2))
+        self.play(ReplacementTransform(text2,texta))
+        self.play(Write(textb),Write(tex3))
+        self.wait(1)
+        self.play(Write(textc),Write(tex4))
+        self.wait(2)
+        self.play(Uncreate(textb),Uncreate(textc),Uncreate(tex3),Uncreate(tex4))
+        self.wait(1)
+        self.play(ReplacementTransform(texta,textd))
+        self.play(Write(texte),Write(tex5))
+        self.wait(1)
+        self.play(Write(textf),Write(tex6))
+        self.wait(2)
+        self.play(Uncreate(texte),Uncreate(textf),Uncreate(tex5),Uncreate(tex6))
+        self.wait(1)
+        self.play(ReplacementTransform(textd,text3))
+        self.play(Write(tex7),Write(textg))
+        self.wait(2)
+        self.play(Uncreate(tex7),Uncreate(textg))
+        self.wait(1)
+        self.play(ReplacementTransform(text3,text4))
+        self.play(Write(tex8))
+        self.wait(0.7)
+        self.play(Write(tex9))
+        self.wait(1)
+        self.play(ReplacementTransform(tex8,tex10),ReplacementTransform(tex9,tex11),Write(tex12))
+        self.wait(2)
+        self.play(Uncreate(tex10),Uncreate(tex11),Uncreate(tex12),Uncreate(text4))
+        self.play(ReplacementTransform(text1,text5))
+        self.play(Write(tex13))
+        self.wait(2)
+        self.play(ReplacementTransform(text5,text6))
+        self.wait(3)
+
+class Sixth(Scene):
+    def construct(self):
+        text0 = MyText("六、总结+UP主的一些废话（bushi）").set_color(PINK).to_corner(UL)
+        text1 = MyText("无论是阶乘还是gamma函数",t2c={"阶乘":YELLOW,"gamma函数":RED})
+        text2 = MyText("都已经成为了数学中强而有力的工具",t2c={"强而有力":ORANGE})
+        text3 = MyText("尤其是美妙的gamma函数",t2c={"美妙":PINK})
+        text4 = MyText("它可以出现在需要应用复杂的数学分析的任何场所",t2c={"复杂":GOLD})
+        text5 = MyText("从概率论到微分方程，再到解析数论",t2c={"概率论":RED,"微分方程":GREEN_SCREEN,"解析数论":BLUE})
+        text6 = MyText("它或许早已经被人们看作是最重要的“高级函数”",t2c={"高级函数":GOLD,"重要":MAROON_E})
+        text7 = MyText("这一切都展现了数学家们惊人的独创性",t2c={"惊人":GOLD,"独创性":BLUE})
+        text8 = MyText("但是仔细想想这一切又有什么用呢？")
+        text9 = MyText("它们在现实生活面前一文不值",t2c={"一文不值":LIGHT_GRAY})
+        text10 = MyText("“美”可能是唯一的答案……",t2c={"美":RED_E,"唯一":PURPLE})
+        img1 =  ImageMobject("hadai.jpg",height =5,invert = False).to_edge(LEFT)
+        text11 = TextMobject("戈弗雷·哈代(1877年2月7日－1947年12月1日)英国数学家",stroke_width=0.7).scale(0.3).next_to(img1,DOWN)
+        text12 = Text("数学研究即便是无益的，至少也\n        是完全清白无害的工作。\n    ——戈弗雷·哈罗德·哈代",font = "黑体",stroke_width=1,t2c={"无益":GREEN,"无害":BLUE}).scale(0.5).to_edge(2*UP+RIGHT)
+        text13 = Text(" The study of mathematics is,if an\n unprofitable,a perfectly harmless\n           and innocent occupation.\n                         ——G.H.H",font = "黑体",stroke_width=1,t2c={"unprofitable":GREEN,"harmless":BLUE}).scale(0.5).to_edge(3*DOWN+RIGHT)
+
+        self.play(ShowCreation(text0),run_time=2)
+        self.wait(0.5)
+        self.play(Uncreate(text0))
+        self.play(Write(text1))
+        self.wait(2)
+        self.play(ReplacementTransform(text1,text2))
+        self.wait(2)
+        self.play(ReplacementTransform(text2,text3))
+        self.wait(2)
+        self.play(ReplacementTransform(text3,text4))
+        self.wait(2)
+        self.play(ReplacementTransform(text4,text5))
+        self.wait(2)
+        self.play(ReplacementTransform(text5,text6))
+        self.wait(2)
+        self.play(ReplacementTransform(text6,text7))
+        self.wait(2)
+        self.play(ReplacementTransform(text7,text8))
+        self.wait(2)
+        self.play(ReplacementTransform(text8,text9))
+        self.wait(2)
+        self.play(ReplacementTransform(text9,text10))
+        self.wait(2)
+        self.play(FadeOut(text10),run_time = 4)
+        self.wait(1)
+        self.play(FadeIn(img1))
+        self.play(Write(text11))
+        self.play(Write(text12))
+        self.play(Write(text13))
+        self.wait(5)
+
+
+class Seventh(Scene):
+    def construct(self):
+        text1 =MyText("本期视频到这里就结束啦").set_color(YELLOW)
+        text2 =MyText("喜欢的朋友不要忘了素质三连加关注哦").set_color(GREEN)
+        svg1 = SVGMobject("coin.svg",color=BLUE,stoke_width = 0.00).next_to(text2,DOWN,0.7)
+        svg2 = SVGMobject("favo.svg",color=BLUE,stoke_width = 0.00).next_to(svg1,RIGHT,1)
+        svg3 = SVGMobject("good.svg",color=BLUE,stoke_width = 0.00).next_to(svg1,LEFT,1)
+        img1 = ImageMobject("up.jpg",height = 6,invert = False).to_edge(-7*UP).scale(0.3)
+        text4 =MyText("@开山卧虫").set_color_by_gradient([BLUE,YELLOW,GREEN,RED,WHITE]).next_to(img1,DOWN)
+
+
+
+        self.play(Write(text1))
+        self.wait(1)
+        self.play(ReplacementTransform(text1,text2))
+        self.wait(1)
+        self.play(ShowCreation(svg1),ShowCreation(svg2),ShowCreation(svg3),FadeIn(img1))
+        self.play(Write(text4))
+        self.wait(4)
+        
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
